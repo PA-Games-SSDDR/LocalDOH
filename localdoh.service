@@ -1,0 +1,13 @@
+[Unit]
+Description=Gunicorn instance to serve localdoh
+After=network.target
+
+[Service]
+User=subrata32
+Group=www-data
+WorkingDirectory=/home/subrata32/LocalDOH
+Environment="PATH=/home/subrata32/LocalDOH/venv/bin"
+ExecStart=/home/subrata32/LocalDOH/venv/bin/gunicorn --workers 3 --bind unix:localdoh.sock -m 007 wsgi:app
+
+[Install]
+WantedBy=multi-user.target
